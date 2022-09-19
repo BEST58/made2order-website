@@ -6,7 +6,7 @@ class Conveyor {
         this.height = 200;
         this.conveyorLines = [];
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < this.width / 40; i++) {
             this.conveyorLines.push(new ConveyorLine(i * 40, this.y, 5, this.height));
         }
     }
