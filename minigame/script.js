@@ -22,13 +22,14 @@ var gameSpeed = 1;
 var score = 0;
 
 // Wait until the user clicks the canvas to start the game
-gameCanvas.addEventListener("click", function () {
+gameCanvas.addEventListener("click", function (event) {
     // Start the game
     if (!isGamePlaying) {
         requestAnimationFrame(fadeOut);
     } else {
-        motorCollector.clicked();
-        wheelCollector.clicked();
+        // Check if the user clicked on a controller
+        motorCollector.isMouseOver(event.offsetX, event.offsetY);
+        wheelCollector.isMouseOver(event.offsetX, event.offsetY);
     }
 });
 
@@ -65,12 +66,19 @@ function fadeOut() {
 
 // Create game objects
 const conveyor = new Conveyor();
-const motorCollector = new Collector(150, 50, 100, 50, 1, "Motors");
-const wheelCollector = new Collector(300, 500, 100, 50, -1, "Wheels");
+const motorCollector = new Collector(150, 50, 100, 50, 1, "Motors", 5);
+const wheelCollector = new Collector(300, 500, 100, 50, -1, "Wheels", 4);
+/**
+ * @type {Part[]}
+ */
+var parts = [];
+
+const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png"};
 
 function increaseGameSpeed() {
     gameSpeed += 1;
     conveyor.updateGameSpeed(gameSpeed);
+    parts.forEach(part => part.updateGameSpeed(gameSpeed));
 
     console.log("Increased game speed to " + gameSpeed);
 }
@@ -87,22 +95,38 @@ function doGameLogic() {
     gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
     times += 1;
-    if (times % 1000 == 0) increaseGameSpeed();
+    if (times % 1500 == 0) increaseGameSpeed();
+
+    // Spawn the parts
+    if (times % (300 / gameSpeed) == 0) {
+        const randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
+        const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, randomName, "../images/" + partLists[randomName]);
+        parts.push(part);
+    }
 
     // Update the game objects
     conveyor.update();
     motorCollector.update();
     wheelCollector.update();
+    parts.forEach(part => part.update());
+
+    const partsToRemove = [];
+    parts.forEach(part => {
+        if (part.isOutside()) {
+            partsToRemove.push(part);
+        }
+    });
+    parts = parts.filter(part => !partsToRemove.includes(part));
+
+    score += motorCollector.getNotCountedScore();
+    score += wheelCollector.getNotCountedScore();
 
     // Draw the game
     conveyor.draw();
     motorCollector.draw();
     wheelCollector.draw();
     drawTrashBin();
-
-    // Update the score:
-    score = 0;
-    score += motorCollector.amount * 3;
+    parts.forEach(part => part.draw());
 
     // Draw the score
     gameContext.fillStyle = "#000000";
