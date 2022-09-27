@@ -6,22 +6,25 @@
 }
 
 .flexNavBar {
-    width:100%
+    width:100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.flexRight{
+.flexSection{
     flex:50%;
 }
 
-.flexLogo{
-    flex:50%
+.flexLinkBar{
+    flex: 50%;
+    display:flex;
+    justify-content:space-around;
+    
 }
 
 @media (max-width: 800px) {
-    .flexLeft, .flexRight {
+    .flexSection {
 	flex: 100%
     }
 }
