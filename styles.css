@@ -4,3 +4,25 @@
 	--lighter-text-color: #2E5984;
 	--text-color: #1E3F66;
 }
+
+.flexNavBar {
+    width:100%
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.flexRight{
+    flex:50%;
+}
+
+.flexLogo{
+    flex:50%
+}
+
+@media (max-width: 800px) {
+    .flexLeft, .flexRight {
+	flex: 100%
+    }
+}
+		   
