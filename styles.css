@@ -1,31 +1,58 @@
 :root {
-	--main-bg-color: #91BAD6;
-	--darker-bg-color: #73A5C6;
-	--lighter-text-color: #2E5984;
-	--text-color: #1E3F66;
+    --main-bg-color: #2f5984;
+    --lighter-bg-color: #528AAE;
+    --darker-bg-color: #1E3F66;
+    --text-color: #F8F7F2;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    padding: 0;
+    margin: 0;
 }
 
 .flexNavBar {
-    width:100%;
+    background-color: var(--lighter-bg-color);
+    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin: 0;
+    padding: 5px;
+
+    font-size: calc(1vw + 1vh);
 }
 
-.flexSection{
-    flex:50%;
-}
-
-.flexLinkBar{
+.flexSection {
     flex: 50%;
-    display:flex;
-    justify-content:space-around;
-    
+}
+
+.flexLinkBar {
+    flex: 50%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.flexLinkBar > div {
+    text-align: center;
+}
+
+.flexLinkBar a {
+    text-decoration: none;
+    color: var(--text-color);
+    text-shadow: 2px 2px #ED872D;
 }
 
 @media (max-width: 800px) {
-    .flexSection {
-	flex: 100%
+
+    .flexSection,
+    .flexLinkBar {
+        flex: 100%
     }
+
+    .flexLinkBar {
+        flex-direction: column;
+    }
+
 }
-		   
