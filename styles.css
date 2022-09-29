@@ -3,6 +3,7 @@
     --lighter-bg-color: #528AAE;
     --darker-bg-color: #1E3F66;
     --text-color: #F8F7F2;
+    --darker-text-color: #494745;
 }
 
 body {
@@ -10,6 +11,12 @@ body {
     color: var(--text-color);
     padding: 0;
     margin: 0;
+}
+
+.navBar {
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 
 .flexNavBar {
@@ -20,7 +27,6 @@ body {
     flex-wrap: wrap;
     margin: 0;
     padding: 5px;
-
     font-size: calc(1vw + 1vh);
 }
 
@@ -42,6 +48,16 @@ body {
     text-decoration: none;
     color: var(--text-color);
     text-shadow: 2px 2px #ED872D;
+    transition: color 300ms ease-in-out, font-size 300ms ease-in-out;
+}
+
+.flexLinkBar a.selected {
+    color: var(--darker-text-color);
+}
+
+.flexLinkBar a:hover {
+    color: var(--darker-text-color);
+    font-size: calc(1.1vw + 1.1vh);
 }
 
 @media (max-width: 800px) {
@@ -55,4 +71,10 @@ body {
         flex-direction: column;
     }
 
+}
+
+@media (prefers-reduced-motion) {
+    .flexNavBar {
+      transition: none;
+    }
 }
