@@ -79,6 +79,7 @@ body {
 
 .video {
     max-width: 1000px;
+    border: none;
 }
 
 .mainContent {
