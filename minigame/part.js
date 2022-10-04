@@ -8,6 +8,8 @@ class Part {
         this.name = name;
         this.image = new Image();
         this.image.src = imagePath;
+        this.parent = null;
+        this.toBeDeleted = false;
     }
 
     updateGameSpeed(newSpeed) {
@@ -15,15 +17,37 @@ class Part {
     }
 
     update() {
-        this.x += this.speed;
+        if(this.parent == null) {
+            this.x += this.speed;
+            return;
+        }
+
+        const oldY = this.y;
+        if(this.parent.direction == 1) {
+            this.x = this.parent.armX + (20 / 2) - (this.width / 2);
+            this.y = this.parent.armY + this.parent.armHeight;
+        } else {
+            this.x = this.parent.armX + (20 / 2) - (this.width / 2);
+            this.y = this.parent.armY + this.parent.armHeight - this.height / 2;
+        }
+        if(oldY == this.y) {
+            this.toBeDeleted = true;
+        }
     }
 
     draw() {
         gameContext.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
+    /**
+     * @param {Collector} collector 
+     */
+    setHoldingParent(collector) {
+        this.parent = collector;
+    }
+
     isOutside() {
-        return this.x > 600;
+        return this.x > 600 || this.toBeDeleted;
     }
 
 }

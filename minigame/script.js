@@ -106,8 +106,8 @@ function doGameLogic() {
 
     // Update the game objects
     conveyor.update();
-    motorCollector.update();
-    wheelCollector.update();
+    motorCollector.update(parts);
+    wheelCollector.update(parts);
     parts.forEach(part => part.update());
 
     const partsToRemove = [];
@@ -129,7 +129,7 @@ function doGameLogic() {
     drawTrashBin();
 
     // Draw the score
-    gameContext.fillStyle = "#000000";
+    gameContext.fillStyle = "#FFFFFF";
     gameContext.font = "30px Arial";
     gameContext.textAlign = "left";
     gameContext.fillText("Score: " + score, 10, 20);

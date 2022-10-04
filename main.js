@@ -12,8 +12,15 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll(".hidden");
 hiddenElements.forEach(ele => observer.observe(ele));
 
-// IFrame/Video auto height:
-const videos = document.querySelectorAll(".video")
-videos.forEach(ele => {
-    ele.style.height = ele.clientWidth / 16 * 9 + "px"
-})
+
+window.addEventListener("resize", sizeVideos)
+
+function sizeVideos() {
+    // IFrame/Video auto height:
+    const videos = document.querySelectorAll(".video")
+    videos.forEach(ele => {
+        ele.style.height = ele.clientWidth / 16 * 9 + "px"
+    })
+}
+
+sizeVideos();
