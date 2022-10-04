@@ -55,6 +55,7 @@ body {
 
 .flexLinkBar a:hover {
     color: var(--darker-text-color);
+    cursor: pointer;
 }
 
 .flexLinkBar a:after,
