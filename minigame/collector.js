@@ -1,5 +1,6 @@
 class Collector {
     constructor(x, y, width, height, direction, name, scoreAmount) {
+        this.defaults = [x, y]
         this.x = x;
         this.y = y;
         this.armX = x + (width / 2 - 10);
@@ -15,6 +16,18 @@ class Collector {
 
         this.scoreToSave = 0;
         this.scoreAmount = scoreAmount;
+        this.heldPart = null;
+    }
+
+    reset() {
+        this.x = this.defaults[0];
+        this.y = this.defaults[1];
+        this.armX = this.defaults[0] + (this.width / 2 - 10);
+        this.armY = this.defaults[1] + (this.height / 2 - 10);
+        this.armHeight = 20 * this.direction;
+        this.animationPos = -1;
+        this.amount = 0;
+        this.scoreToSave = 0;
         this.heldPart = null;
     }
 

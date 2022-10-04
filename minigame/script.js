@@ -69,7 +69,6 @@ function endGame() {
 
     isGamePlaying = false;
 
-    console.log(gameContext.globalAlpha)
     if (gameContext.globalAlpha < 1) {
         gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
@@ -112,6 +111,9 @@ function increaseGameSpeed() {
 function startGame() {
     // Clear the canvas
     gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+    motorCollector.reset();
+    wheelCollector.reset();
 
     times = 0;
     gameSpeed = 1;
