@@ -125,8 +125,8 @@ function doGameLogic() {
     conveyor.draw();
     motorCollector.draw();
     wheelCollector.draw();
-    drawTrashBin();
     parts.forEach(part => part.draw());
+    drawTrashBin();
 
     // Draw the score
     gameContext.fillStyle = "#000000";

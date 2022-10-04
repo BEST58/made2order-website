@@ -65,7 +65,7 @@ body {
     width: 100%;
     transform: scaleX(0);
     height: 3px;
-    bottom: 0;
+    bottom: -1px;
     left: 0;
     background-color: var(--text-color);
     transform-origin: bottom right;
