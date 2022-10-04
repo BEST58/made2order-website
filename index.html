@@ -7,37 +7,39 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home | BEST Team 0058</title>
 	<link rel="stylesheet" href="./styles.css">
+	<script defer src="main.js"></script>
 </head>
 
 <body>
 	<header class="mainHeader">
 
 	</header>
-	<nav class="navBar">
-		<div class="flexNavBar">
-
-			<div class="flexSection">
-				<b>Team 0058</b>
-			</div>
-
-			<div class="flexLinkBar">
-				<div><a href="#" class="selected">Home</a></div>
-				<div><a href="booth/index.html">Booth</a></div>
-				<div><a href="robot/index.html">Robot</a></div>
-				<div><a href="outreach/index.html">Outreach</a></div>
-				<div><a href="minigame/index.html">Minigame</a></div>
-			</div>
-
-
+	<nav class="flexNavBar">
+		<div class="flexSection">
+			<b>Team 0058</b>
 		</div>
 
-		<!-- should by css 'sticky' aka move with the scrolling -->
-		<!-- should have the current page - with a clear indication you are there already (clicking it scrolls to top) -->
+		<div class="flexLinkBar">
+			<div><a href="#" class="selected">Home</a></div>
+			<div><a href="booth/index.html">Booth</a></div>
+			<div><a href="robot/index.html">Robot</a></div>
+			<div><a href="outreach/index.html">Outreach</a></div>
+			<div><a href="minigame/index.html">Minigame</a></div>
+		</div>
 	</nav>
 	<main class="mainContent">
-		<!-- 
-			should be most of the page - unlike last year
-			should have some padding, not too much
-		-->
+		<section id="bestRobotics" class="hidden hiddenLeft">
+			<img src="images/BESTRobotics_Logo.jpg" width="50%">
+			<h2>BEST Robotics</h2>
+			<p>BEST Robotics is an organization dedicated to helping students learn. It is non-profit and teaches students skills they can use in a STEM job. Thousands of volunteers come together to make BEST possible, so our team just wants to say thank you!</p>
+			<p>This year's competition is Made2Order. It is about manufacturing with the goal of collecting the parts to assemble a robot. The game animation is shown below.</p>
+			<iframe class="video" src="https://drive.google.com/file/d/1t_VfXZEp6JkQoAiRt8BEgNaTJFcu9vQ1/preview" width="100%" allow="autoplay"></iframe>
+		</section>
+
+		<section id="ourTeam" class="hidden hiddenRight">
+			<img src="images/logo.png" width="40%">
+			<h2>Eagle Robotics</h2>
+			<p>Our team, 0058, is a high school robotics team based out of Allen, Texas.</p>
+		</section>
 	</main>
 </body>
