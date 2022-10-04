@@ -47,7 +47,11 @@ class Part {
     }
 
     isOutside() {
-        return this.x > 600 || this.toBeDeleted;
+        return this.x > 600;
+    }
+
+    doesNeedsToBeDeleted() {
+        return this.toBeDeleted;
     }
 
 }

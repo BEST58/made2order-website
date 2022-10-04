@@ -20,6 +20,7 @@ var isGamePlaying = false;
 var times = 0;
 var gameSpeed = 1;
 var score = 0;
+var lives = 4;
 
 // Wait until the user clicks the canvas to start the game
 gameCanvas.addEventListener("click", function (event) {
@@ -37,11 +38,7 @@ function fadeOut() {
     isGamePlaying = true;
 
     if (gameContext.globalAlpha > 0.01) {
-        const oldAlpha = gameContext.globalAlpha;
-        gameContext.globalAlpha = 1;
-        gameContext.fillStyle = "#FFFFFF";
-        gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
-        gameContext.globalAlpha = oldAlpha;
+        gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
         gameContext.fillStyle = "#000000";
         gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -56,11 +53,38 @@ function fadeOut() {
         requestAnimationFrame(fadeOut);
     } else {
         gameContext.globalAlpha = 1;
-        gameContext.fillStyle = "#FFFFFF";
-        gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+        gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
         setTimeout(() => {
             startGame();
         }, 300);
+    }
+}
+
+function endGame() {
+    if(isGamePlaying) {
+        parts = [];
+        gameContext.globalAlpha = 0;
+        console.log("game ending")
+    }
+
+    isGamePlaying = false;
+
+    console.log(gameContext.globalAlpha)
+    if (gameContext.globalAlpha < 1) {
+        gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+        gameContext.fillStyle = "#000000";
+        gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+        gameContext.font = "30px Arial";
+        gameContext.fillStyle = "#FFFFFF";
+        gameContext.textAlign = "center";
+        gameContext.textBaseline = "middle";
+        gameContext.fillText("Game Over", gameCanvas.width / 2, gameCanvas.height / 2);
+
+        gameContext.globalAlpha += 0.01;
+        if(gameContext.globalAlpha >= 0.99) gameContext.globalAlpha = 1
+        requestAnimationFrame(endGame);
     }
 }
 
@@ -76,6 +100,8 @@ var parts = [];
 const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png"};
 
 function increaseGameSpeed() {
+    if(gameSpeed > 4) return;
+
     gameSpeed += 1;
     conveyor.updateGameSpeed(gameSpeed);
     parts.forEach(part => part.updateGameSpeed(gameSpeed));
@@ -86,6 +112,12 @@ function increaseGameSpeed() {
 function startGame() {
     // Clear the canvas
     gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+    times = 0;
+    gameSpeed = 3;
+    conveyor.updateGameSpeed(gameSpeed);
+    score = 0;
+    lives = 4;
 
     requestAnimationFrame(doGameLogic);
 }
@@ -114,6 +146,9 @@ function doGameLogic() {
     parts.forEach(part => {
         if (part.isOutside()) {
             partsToRemove.push(part);
+            lives -= 1;
+        } else if (part.doesNeedsToBeDeleted()) {
+            partsToRemove.push(part);
         }
     });
     parts = parts.filter(part => !partsToRemove.includes(part));
@@ -133,6 +168,12 @@ function doGameLogic() {
     gameContext.font = "30px Arial";
     gameContext.textAlign = "left";
     gameContext.fillText("Score: " + score, 10, 20);
+
+    // Todo: Draw the battery (lives)
+
+    console.log(lives)
+
+    if(lives == 0) return endGame(true);
 
     if (isGamePlaying) requestAnimationFrame(doGameLogic);
 }
