@@ -43,7 +43,7 @@ function fadeOut() {
         gameContext.fillStyle = "#000000";
         gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-        gameContext.font = "30px Arial";
+        gameContext.font = "30px Consolas,monaco,monospace";
         gameContext.fillStyle = "#FFFFFF";
         gameContext.textAlign = "center";
         gameContext.textBaseline = "middle";
@@ -76,7 +76,7 @@ function endGame() {
         gameContext.fillStyle = "#000000";
         gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-        gameContext.font = "30px Arial";
+        gameContext.font = "30px Consolas,monaco,monospace";
         gameContext.fillStyle = "#FFFFFF";
         gameContext.textAlign = "center";
         gameContext.textBaseline = "middle";
@@ -114,7 +114,7 @@ function startGame() {
     gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
 
     times = 0;
-    gameSpeed = 3;
+    gameSpeed = 1;
     conveyor.updateGameSpeed(gameSpeed);
     score = 0;
     lives = 4;
@@ -165,7 +165,7 @@ function doGameLogic() {
 
     // Draw the score
     gameContext.fillStyle = "#FFFFFF";
-    gameContext.font = "30px Arial";
+    gameContext.font = "30px Consolas,monaco,monospace";
     gameContext.textAlign = "left";
     gameContext.fillText("Score: " + score, 10, 20);
 
@@ -187,6 +187,6 @@ function drawTrashBin() {
 
     gameContext.textAlign = "center";
     gameContext.fillStyle = "#485c44";
-    gameContext.font = "90px Arial";
+    gameContext.font = "90px Consolas,monaco,monospace";
     gameContext.fillText("♲", 610 + (150 / 2), 175 + (250 / 2));
 }
