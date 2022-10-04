@@ -60,6 +60,10 @@ body {
     font-size: calc(1.1vw + 1.1vh);
 }
 
+.video {
+    max-width: 1000px;
+}
+
 .mainContent {
     margin-left: 7.5vw;
     margin-right: 7.5vw;
@@ -68,10 +72,13 @@ body {
 }
 
 .mainContent section {
-    padding: 1vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
     background-color: var(--darker-bg-color);
     box-shadow: 10px 5px 5px var(--lighter-bg-color);
-    width: 100%;
+    width: calc(100% - 10vw);
     text-align: center;
     margin-bottom: 50px;
 }
