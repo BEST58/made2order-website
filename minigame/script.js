@@ -10,7 +10,7 @@ gameCanvas.height = 600;
 gameContext.fillStyle = "#000000";
 gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-gameContext.font = "30px Consolas";
+gameContext.font = "30px Consolas,monaco,monospace";
 gameContext.fillStyle = "#FFFFFF";
 gameContext.textAlign = "center";
 gameContext.textBaseline = "middle";
