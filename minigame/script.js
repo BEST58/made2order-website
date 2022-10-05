@@ -31,6 +31,7 @@ gameCanvas.addEventListener("click", function (event) {
         // Check if the user clicked on a controller
         motorCollector.isMouseOver(event.offsetX, event.offsetY);
         wheelCollector.isMouseOver(event.offsetX, event.offsetY);
+        gearCollector.isMouseOver(event.offsetX, event.offsetY);
     }
 });
 
@@ -91,12 +92,14 @@ function endGame() {
 const conveyor = new Conveyor();
 const motorCollector = new Collector(150, 50, 100, 50, 1, "Motors", 5);
 const wheelCollector = new Collector(300, 500, 100, 50, -1, "Wheels", 4);
+const gearCollector = new Collector(150, 500, 100, 50, -1, "Gears", 4);
+
 /**
  * @type {Part[]}
  */
 var parts = [];
 
-const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png"};
+const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png", "Gears": "gearSprite.jpg"};
 
 function increaseGameSpeed() {
     if(gameSpeed > 4) return;
@@ -114,6 +117,7 @@ function startGame() {
 
     motorCollector.reset();
     wheelCollector.reset();
+    gearCollector.reset();
 
     times = 0;
     gameSpeed = 1;
@@ -142,6 +146,7 @@ function doGameLogic() {
     conveyor.update();
     motorCollector.update(parts);
     wheelCollector.update(parts);
+    gearCollector.update(parts);
     parts.forEach(part => part.update());
 
     const partsToRemove = [];
@@ -157,11 +162,13 @@ function doGameLogic() {
 
     score += motorCollector.getNotCountedScore();
     score += wheelCollector.getNotCountedScore();
+    score += gearCollector.getNotCountedScore();
 
     // Draw the game
     conveyor.draw();
     motorCollector.draw();
     wheelCollector.draw();
+    gearCollector.draw();
     parts.forEach(part => part.draw());
     drawTrashBin();
 
