@@ -32,6 +32,7 @@ gameCanvas.addEventListener("click", function (event) {
         motorCollector.isMouseOver(event.offsetX, event.offsetY);
         wheelCollector.isMouseOver(event.offsetX, event.offsetY);
         gearCollector.isMouseOver(event.offsetX, event.offsetY);
+        batteryCollector.isMouseOver(event.offsetX, event.offsetY);
     }
 });
 
@@ -91,15 +92,16 @@ function endGame() {
 // Create game objects
 const conveyor = new Conveyor();
 const motorCollector = new Collector(150, 50, 100, 50, 1, "Motors", 5);
-const wheelCollector = new Collector(300, 500, 100, 50, -1, "Wheels", 4);
+const wheelCollector = new Collector(350, 500, 100, 50, -1, "Wheels", 4);
 const gearCollector = new Collector(150, 500, 100, 50, -1, "Gears", 4);
+const batteryCollector = new Collector(350, 50, 100, 50, 1, "Battery", 5);
 
 /**
  * @type {Part[]}
  */
 var parts = [];
 
-const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png", "Gears": "gearSprite.jpg"};
+const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png", "Gears": "gearSprite.jpg" };
 
 function increaseGameSpeed() {
     if(gameSpeed > 4) return;
@@ -118,6 +120,7 @@ function startGame() {
     motorCollector.reset();
     wheelCollector.reset();
     gearCollector.reset();
+    batteryCollector.reset();
 
     times = 0;
     gameSpeed = 1;
@@ -137,9 +140,14 @@ function doGameLogic() {
 
     // Spawn the parts
     if (times % (300 / gameSpeed) == 0) {
-        const randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
-        const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, randomName, "../images/" + partLists[randomName]);
-        parts.push(part);
+        if(Math.random() <= 0.05)  {
+            const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, "Battery", "../images/batterySprite.png");
+            parts.push(part);
+        } else {
+            const randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
+            const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, randomName, "../images/" + partLists[randomName]);
+            parts.push(part);
+        }
     }
 
     // Update the game objects
@@ -147,6 +155,7 @@ function doGameLogic() {
     motorCollector.update(parts);
     wheelCollector.update(parts);
     gearCollector.update(parts);
+    batteryCollector.update(parts);
     parts.forEach(part => part.update());
 
     const partsToRemove = [];
@@ -163,12 +172,14 @@ function doGameLogic() {
     score += motorCollector.getNotCountedScore();
     score += wheelCollector.getNotCountedScore();
     score += gearCollector.getNotCountedScore();
+    score += batteryCollector.getNotCountedScore();
 
     // Draw the game
     conveyor.draw();
     motorCollector.draw();
     wheelCollector.draw();
     gearCollector.draw();
+    batteryCollector.draw();
     parts.forEach(part => part.draw());
     drawTrashBin();
 
