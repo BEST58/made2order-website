@@ -116,7 +116,7 @@ const conveyor = new Conveyor();
 const motorCollector = new Collector(150, 50, 100, 50, 1, "Motors", 5);
 const wheelCollector = new Collector(350, 500, 100, 50, -1, "Wheels", 4);
 const gearCollector = new Collector(150, 500, 100, 50, -1, "Gears", 4);
-const batteryCollector = new Collector(350, 50, 100, 50, 1, "Battery", 5);
+const batteryCollector = new Collector(350, 50, 100, 50, 1, "Battery", 1);
 
 /**
  * @type {Part[]}
@@ -153,6 +153,9 @@ function startGame() {
     requestAnimationFrame(doGameLogic);
 }
 
+const batteryImage = new Image();
+batteryImage.src = "../images/battery.png"
+
 function doGameLogic() {
     // Clear the canvas
     gameContext.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -162,7 +165,7 @@ function doGameLogic() {
 
     // Spawn the parts
     if (times % (300 / gameSpeed) == 0) {
-        if(Math.random() <= 0.05)  {
+        if(lives <= 3 && Math.random() <= 0.05)  {
             const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, "Battery", "../images/batterySprite.png");
             parts.push(part);
         } else {
@@ -194,15 +197,15 @@ function doGameLogic() {
     score += motorCollector.getNotCountedScore();
     score += wheelCollector.getNotCountedScore();
     score += gearCollector.getNotCountedScore();
-    score += batteryCollector.getNotCountedScore();
+    lives += batteryCollector.getNotCountedScore();
 
     // Draw the game
+    parts.forEach(part => part.draw());
     conveyor.draw();
     motorCollector.draw();
     wheelCollector.draw();
     gearCollector.draw();
     batteryCollector.draw();
-    parts.forEach(part => part.draw());
     drawTrashBin();
 
     // Draw the score
@@ -212,10 +215,9 @@ function doGameLogic() {
     gameContext.fillText("Score: " + score, 10, 20);
 
     // Todo: Draw the battery (lives)
-
-    console.log(lives)
-
     if(lives == 0) return endGame(true);
+
+    gameContext.drawImage(batteryImage, 10 + ((lives - 1) * 125), 60, 108, 160, 560, 10, 30, 43);
 
     if (isGamePlaying) requestAnimationFrame(doGameLogic);
 }
