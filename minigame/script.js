@@ -41,12 +41,16 @@ window.addEventListener('keydown', e => {
         switch(e.key) {
             case "1":
                 motorCollector.clicked();
+                break;
             case "2":
                 batteryCollector.clicked();
+                break;
             case "3":
                 gearCollector.clicked();
+                break;
             case "4":
                 wheelCollector.clicked();
+                break;
         }
     }
 })
