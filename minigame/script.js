@@ -81,7 +81,10 @@ function endGame() {
         gameContext.fillStyle = "#FFFFFF";
         gameContext.textAlign = "center";
         gameContext.textBaseline = "middle";
-        gameContext.fillText("Game Over", gameCanvas.width / 2, gameCanvas.height / 2);
+        gameContext.fillText("Game Over", gameCanvas.width / 2, gameCanvas.height / 2 - 20);
+
+        gameContext.font = "22px Consolas,monaco,monospace";
+        gameContext.fillText("Click to Restart", gameCanvas.width / 2, gameCanvas.height / 2 + 20);
 
         gameContext.globalAlpha += 0.01;
         if(gameContext.globalAlpha >= 0.99) gameContext.globalAlpha = 1
