@@ -200,8 +200,8 @@ function doGameLogic() {
     lives += batteryCollector.getNotCountedScore();
 
     // Draw the game
-    parts.forEach(part => part.draw());
     conveyor.draw();
+    parts.forEach(part => part.draw());
     motorCollector.draw();
     wheelCollector.draw();
     gearCollector.draw();
