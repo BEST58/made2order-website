@@ -36,6 +36,21 @@ gameCanvas.addEventListener("click", function (event) {
     }
 });
 
+window.addEventListener('keydown', e => {
+    if(isGamePlaying) {
+        switch(e.key) {
+            case "1":
+                motorCollector.clicked();
+            case "2":
+                batteryCollector.clicked();
+            case "3":
+                gearCollector.clicked();
+            case "4":
+                wheelCollector.clicked();
+        }
+    }
+})
+
 function fadeOut() {
     isGamePlaying = true;
 
