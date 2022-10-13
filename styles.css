@@ -91,6 +91,14 @@ body {
     margin-bottom: 5vh;
 }
 
+.mainContent h1 {
+    font-size: 2rem;
+}
+
+.mainContent h2 {
+    font-size: 1.5rem;
+}
+
 .mainContent section {
     padding-top: 1vw;
     padding-bottom: 1vw;
@@ -121,6 +129,12 @@ body {
     transition: opacity 750ms ease-in,
                 transform 750ms ease-in,
                 filter 750ms ease-in;
+}
+
+.socialMediaIcon {
+    width: 3.5vw;
+    min-width: 20px;
+    margin-left: 3vw;
 }
 
 .show {
