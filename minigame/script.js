@@ -105,6 +105,8 @@ function endGame() {
         gameContext.font = "22px Consolas,monaco,monospace";
         gameContext.fillText("Click to Restart", gameCanvas.width / 2, gameCanvas.height / 2 + 20);
 
+        gameContext.fillText("Score: " + score, gameCanvas.width / 2, gameCanvas.height / 2 + 60);
+
         gameContext.globalAlpha += 0.01;
         if(gameContext.globalAlpha >= 0.99) gameContext.globalAlpha = 1
         requestAnimationFrame(endGame);
@@ -123,10 +125,12 @@ const batteryCollector = new Collector(350, 50, 100, 50, 1, "Battery", 1);
  */
 var parts = [];
 
-const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png", "Gears": "gearSprite.jpg" };
+var prevPart = "";
+
+const partLists = {"Motors": "motorSprite.png", "Wheels": "wheelSprite.png", "Gears": "gearSprite.png" };
 
 function increaseGameSpeed() {
-    if(gameSpeed > 4) return;
+    if(gameSpeed > 3) return;
 
     gameSpeed += 1;
     conveyor.updateGameSpeed(gameSpeed);
@@ -169,7 +173,11 @@ function doGameLogic() {
             const batteryPart = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, "Battery", "../images/batterySprite.png");
             parts.push(batteryPart);
         } else {
-            const randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
+            var randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
+            while (randomName == prevPart) {
+                randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
+            }
+            prevPart = randomName;
             const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, randomName, "../images/" + partLists[randomName]);
             parts.push(part);
         }
