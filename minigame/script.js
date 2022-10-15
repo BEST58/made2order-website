@@ -165,9 +165,9 @@ function doGameLogic() {
 
     // Spawn the parts
     if (times % (300 / gameSpeed) == 0) {
-        if(lives <= 3 && Math.random() <= 0.05)  {
-            const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, "Battery", "../images/batterySprite.png");
-            parts.push(part);
+        if(lives <= 3 && Math.random() <= 0.1)  {
+            const batteryPart = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, "Battery", "../images/batterySprite.png");
+            parts.push(batteryPart);
         } else {
             const randomName = Object.keys(partLists)[Math.floor(Math.random() * Object.keys(partLists).length)];
             const part = new Part(-100, 300 - (50/2), 50, 50, gameSpeed, randomName, "../images/" + partLists[randomName]);
