@@ -4,6 +4,7 @@
     --darker-bg-color: #1E3F66;
     --text-color: #F8F7F2;
     --darker-text-color: #ecdfdf;
+    --link-color: #5fa2cc;
 }
 
 body {
@@ -109,6 +110,15 @@ body {
     width: calc(100% - 10vw);
     text-align: center;
     margin-bottom: 50px;
+}
+
+.mainContent > section a {
+    color: var(--link-color);
+    transition: 200ms color ease-in-out;
+}
+
+.mainContent > section a:hover {
+    color: var(--lighter-bg-color);
 }
 
 .mainContent section:last-child{
