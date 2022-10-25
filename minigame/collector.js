@@ -135,7 +135,6 @@ class Collector {
 
         if(this.direction == 1) {
             gameContext.save();
-            // gameContext.translate(0, gameCanvas.height);
             gameContext.scale(1, -1);
             gameContext.drawImage(this.magnetImage, this.armX, -(this.armY + (this.armHeight - this.direction * 20)), 30, -30);
             gameContext.restore();

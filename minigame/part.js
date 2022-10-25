@@ -26,9 +26,9 @@ class Part {
 
         const oldY = this.y;
         if(this.parent.direction == 1) {
-            this.y = this.parent.armY + this.parent.armHeight;
+            this.y = this.parent.armY + this.parent.armHeight + 10;
         } else {
-            this.y = this.parent.armY + this.parent.armHeight - this.height / 2;
+            this.y = this.parent.armY + this.parent.armHeight - this.height / 2 - 10;
         }
         if(oldY == this.y) {
             this.toBeDeleted = true;
