@@ -22,12 +22,12 @@ class Part {
             return;
         }
 
+        this.x = this.parent.armX + (30 / 2) - (this.width / 2);
+
         const oldY = this.y;
         if(this.parent.direction == 1) {
-            this.x = this.parent.armX + (20 / 2) - (this.width / 2);
             this.y = this.parent.armY + this.parent.armHeight;
         } else {
-            this.x = this.parent.armX + (20 / 2) - (this.width / 2);
             this.y = this.parent.armY + this.parent.armHeight - this.height / 2;
         }
         if(oldY == this.y) {

@@ -5,9 +5,13 @@ class Conveyor {
         this.width = 600;
         this.height = 200;
         this.conveyorLines = [];
+        this.conveyorImage = new Image();
+        this.conveyorImage.src = "../images/belt.png";
+        this.conveyorLineImage = new Image();
+        this.conveyorLineImage.src = "../images/separator.png";
 
         for (let i = 0; i < this.width / 40; i++) {
-            this.conveyorLines.push(new ConveyorLine(i * 40, this.y, 5, this.height));
+            this.conveyorLines.push(new ConveyorLine(i * 40, this.y, 7, this.height, this.conveyorLineImage));
         }
     }
 
@@ -30,8 +34,7 @@ class Conveyor {
     }
 
     draw() {
-        gameContext.fillStyle = "#2D2D2D";
-        gameContext.fillRect(0, this.y, this.width, this.height);
+        gameContext.drawImage(this.conveyorImage, 0, this.y, this.width, this.height)
 
         for (let i = 0; i < this.conveyorLines.length; i++) {
             const line = this.conveyorLines[i];
@@ -41,12 +44,13 @@ class Conveyor {
 }
 
 class ConveyorLine {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, image) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.speed = 1;
+        this.image = image;
     }
 
     updateGameSpeed(value) {
@@ -58,11 +62,13 @@ class ConveyorLine {
     }
 
     draw() {
-        gameContext.fillStyle = "#5D5D5D";
-        gameContext.fillRect(this.x, this.y, this.width, this.height);
+        gameContext.drawImage(this.image, this.x, this.y, this.width, this.height)
+
+        // gameContext.fillStyle = "#5D5D5D";
+        // gameContext.fillRect(this.x, this.y, this.width, this.height);
         
-        gameContext.strokeStyle = "#0A0A0A";
-        gameContext.lineWidth = 2;
-        gameContext.strokeRect(this.x, this.y + 2, this.width, this.height - 4);
+        // gameContext.strokeStyle = "#0A0A0A";
+        // gameContext.lineWidth = 2;
+        // gameContext.strokeRect(this.x, this.y + 2, this.width, this.height - 4);
     }
 }

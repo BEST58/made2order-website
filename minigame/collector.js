@@ -3,7 +3,7 @@ class Collector {
         this.defaults = [x, y]
         this.x = x;
         this.y = y;
-        this.armX = x + (width / 2 - 10);
+        this.armX = x + (width / 2 - 15);
         this.armY = y + (height / 2 - 10);
         this.armHeight = 20 * direction;
 
@@ -14,6 +14,12 @@ class Collector {
         this.animationPos = -1;
         this.amount = 0;
 
+        this.gripperImage = new Image();
+        this.gripperImage.src = "../images/gripper.png";
+
+        this.magnetImage = new Image();
+        this.magnetImage.src = "../images/magnet.png";
+
         this.scoreToSave = 0;
         this.scoreAmount = scoreAmount;
         this.heldPart = null;
@@ -22,7 +28,7 @@ class Collector {
     reset() {
         this.x = this.defaults[0];
         this.y = this.defaults[1];
-        this.armX = this.defaults[0] + (this.width / 2 - 10);
+        this.armX = this.defaults[0] + (this.width / 2 - 15);
         this.armY = this.defaults[1] + (this.height / 2 - 10);
         this.armHeight = 20 * this.direction;
         this.animationPos = -1;
@@ -81,7 +87,7 @@ class Collector {
                     const armY = this.direction == -1 ? (this.armY + 20 + this.armHeight) : (this.armY)
                     const armY2 = this.direction == 1 ? (this.armY + this.armHeight) : (this.armY)
                     if(this.isOverlapping2D(
-                            {x: { x1: this.armX, x2: this.armX + 20 }, y: { x1: armY, x2: armY2 }},
+                            {x: { x1: this.armX, x2: this.armX + 30 }, y: { x1: armY, x2: armY2 }},
                             {x: { x1: part.x, x2: part.x + part.width }, y: { x1: part.y, x2: part.y + part.height }}
                         )
                     ) {
@@ -122,7 +128,19 @@ class Collector {
         gameContext.fillStyle = "#DDDDDD";
         gameContext.font = "14px Arial";
         gameContext.fillText(this.name + ": " + this.amount, this.x + this.width / 2, this.y + this.height * this.direction + (this.direction == 1 ? 40 : 10));
+    }
 
-        gameContext.fillRect(this.armX, this.armY + (this.direction == -1 ? 20 : 0), 20, this.armHeight);
+    drawArm() {
+        gameContext.drawImage(this.gripperImage, this.armX, this.armY + (this.direction == -1 ? 20 : 0), 30, (this.armHeight - this.direction * 30));
+
+        if(this.direction == 1) {
+            gameContext.save();
+            // gameContext.translate(0, gameCanvas.height);
+            gameContext.scale(1, -1);
+            gameContext.drawImage(this.magnetImage, this.armX, -(this.armY + (this.armHeight - this.direction * 20)), 30, -30);
+            gameContext.restore();
+        } else {
+            gameContext.drawImage(this.magnetImage, this.armX, this.armY + 10 + (this.armHeight), 30, 30);
+        }
     }
 }
