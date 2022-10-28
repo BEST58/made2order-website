@@ -9,6 +9,13 @@
 	<link rel="stylesheet" href="../styles.css">
 	<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 	<script defer src="../main.js"></script>
+	<style>
+		#posters > img {
+			box-shadow: 10px 5px 5px var(--lighter-bg-color);
+			max-width: calc(100% - 20px);
+			margin-top: 1vh;
+		}
+	</style>
 </head>
 
 <body>
@@ -17,7 +24,7 @@
 	</header>
 	<nav class="flexNavBar">
 		<div class="flexSection">
-			<b>Team 0058</b>
+			<img id="horizontalLogo" alt="Eagle Robotics" height="156" width="604" src="../images/horizontalLogo.png" >
 		</div>
 
 		<div class="flexLinkBar">
@@ -29,9 +36,14 @@
 		</div>
 	</nav>
 	<main class="mainContent">
-		<section id="bestRobotics" class="hidden hiddenLeft">
+		<section id="mainHeader">
 			<h1>Our Booth</h1>
-			<p></p>
+		</section>
+		<section id="posters" class="hidden hiddenRight">
+			<h2>Posters</h2>
+			<img alt="Design Process" src="../images/designProcessPoster.png" />
+			<img alt="Mission Statement" src="../images/missionStatementPoster.png" />
+			<img alt="Sponsors" src="../images/sponsorsPoster.png" />
 		</section>
 	</main>
 </body>

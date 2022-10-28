@@ -27,7 +27,7 @@ body {
     flex-wrap: wrap;
     margin: 0;
     padding: 5px;
-    font-size: calc(1vw + 1vh);
+    font-size: min(calc(0.75vw + 1.25vh), 20px);
     z-index: 999;
 }
 
@@ -42,6 +42,7 @@ body {
 }
 
 .flexLinkBar > div {
+    margin: auto;
     text-align: center;
 }
 
@@ -101,8 +102,9 @@ body {
 }
 
 .mainContent section {
-    padding-top: 1vw;
-    padding-bottom: 1vw;
+    border-radius: 10px;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
     padding-left: 5vw;
     padding-right: 5vw;
     background-color: var(--darker-bg-color);
@@ -153,11 +155,21 @@ body {
     filter: blur(0);
 }
 
+#horizontalLogo {
+    transition: height 0.3s ease-in-out,
+                width 0.3s ease-in-out;
+    max-width: calc(100vw - 20px);
+}
+
 @media (max-width: 800px) {
+
+    .flexNavBar {
+        position: relative;
+    }
 
     .flexSection,
     .flexLinkBar {
-        flex: 100%
+        flex: 100%;
     }
 
     .flexLinkBar {

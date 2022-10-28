@@ -24,3 +24,32 @@ function sizeVideos() {
 }
 
 sizeVideos();
+
+var changedRecently = false;
+
+window.addEventListener("scroll", (event) => {
+    const logo = document.querySelector('#horizontalLogo');
+    let scroll = document.documentElement.scrollTop;
+    if(changedRecently) return;
+    if(scroll == 0) {
+        if(logo.height != 156) {
+            logo.height = 156;
+            logo.width = 604;
+            changedRecently = true;
+            setTimeout(() => {
+                changedRecently = false;
+                window.scrollTo(0, 0);
+            }, 300);
+        }
+    } else {
+        if(logo.height != 50) {
+            logo.height = 50;
+            logo.width = 151/39*50;
+            changedRecently = true;
+            setTimeout(() => {
+                changedRecently = false;
+                if(document.documentElement.scrollTop < 10) window.scroll(0, 10);
+            }, 300);
+        }
+    }
+});
