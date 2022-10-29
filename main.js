@@ -38,7 +38,7 @@ window.addEventListener("scroll", (event) => {
             changedRecently = true;
             setTimeout(() => {
                 changedRecently = false;
-                window.scrollTo(0, 0);
+                if(document.documentElement.scrollTop < 20) window.scrollTo(0, 0);
             }, 300);
         }
     } else {

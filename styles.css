@@ -128,11 +128,11 @@ body {
 }
 
 .hiddenLeft {
-    transform: translateX(-100%);
+    transform: translateX(-10%);
 }
 
 .hiddenRight {
-    transform: translateX(100%);
+    transform: translateX(10%);
 }
 
 .hidden {
