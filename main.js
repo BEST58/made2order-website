@@ -32,9 +32,11 @@ window.addEventListener("scroll", (event) => {
     let scroll = document.documentElement.scrollTop;
     if(changedRecently) return;
     if(scroll == 0) {
-        if(logo.height != 156) {
-            logo.height = 156;
+        const expectedWidth = (document.body.clientWidth - 20 > 604 ? 604 : document.body.clientWidth - 20);
+        if(logo.height != 39/151*expectedWidth) {
             logo.width = 604;
+            logo.height = 39/151*expectedWidth;
+            console.log(expectedWidth)
             changedRecently = true;
             setTimeout(() => {
                 changedRecently = false;
@@ -53,3 +55,6 @@ window.addEventListener("scroll", (event) => {
         }
     }
 });
+
+const logo = document.querySelector('#horizontalLogo');
+logo.height = 39/151*logo.clientWidth;
