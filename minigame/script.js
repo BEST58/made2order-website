@@ -10,7 +10,7 @@ if (document.body.clientWidth < 800) {
     gameContext.fillStyle = "#000000";
     gameContext.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-    gameContext.font = "30px Consolas,monaco,monospace";
+    gameContext.font = `${document.body.clientWidth / 100 * 5}px Consolas,monaco,monospace`;
     gameContext.fillStyle = "#FFFFFF";
     gameContext.textAlign = "center";
     gameContext.textBaseline = "middle";
