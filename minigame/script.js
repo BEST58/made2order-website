@@ -70,9 +70,11 @@ if (document.body.clientWidth < 800) {
                     break;
                 case "ArrowUp":
                     if (gameSpeed < 5) setGameSpeed(gameSpeed + 1);
+                    e.preventDefault();
                     break;
                 case "ArrowDown":
                     if (gameSpeed > 1) setGameSpeed(gameSpeed - 1);
+                    e.preventDefault();
                     break;
             }
         }
